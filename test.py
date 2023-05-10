@@ -1,17 +1,25 @@
+import keyboard
+import pyautogui
+from PIL import Image
 
+def create_image():
+    # Capture the specified screen region
+    screenshot = pyautogui.screenshot(region=(590, 165, 680, 670))
 
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
-Polygons = []
+    # Save the captured region as "new_board.jpeg"
+    screenshot.save("board.jpg")
+    print("Image created")
 
-for row in range(8):
-    for col in range(8):
-        x1 = col * 85
-        y1 = row * 85
-        x2 = x1 + 85
-        y2 = y1 + 85
-        
-        polygon = Polygon([(x1, y1), (x2, y1), (x2, y2), (x1, y2)])
-        Polygons.append(polygon)
-polygonlist = list(Polygons)
-print(polygonlist)
+def on_keypress(event):
+    if event.name == 'esc':  # Exit the program if the 'esc' key is pressed
+        keyboard.unhook_all()
+        print("Exiting the program...")
+        exit()
+    elif event.name == 'g' and event.event_type == 'down':  # Capture and create the image when 'g' key is pressed
+        create_image()
+
+# Register the keypress event listener
+keyboard.on_press(on_keypress)
+
+# Start the keyboard event listener
+keyboard.wait()
