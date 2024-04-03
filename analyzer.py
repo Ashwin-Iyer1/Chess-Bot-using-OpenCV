@@ -7,11 +7,13 @@ from stockfish import Stockfish
 import io
 import pyautogui
 import time
+import Finder
 
+print("Please select the chessboard region")
+board_region = Finder.get_region()
 stockfish = Stockfish("StockFish/stockfish_13_win_x64_bmi2.exe")
 stockfish.set_depth(10)
 stockfish.set_skill_level(20)
-board_region = (590, 165, 680, 670)
 BBishop_img = cv2.imread('BlackPieces/BBishop.jpg')
 BKing_img = cv2.imread('BlackPieces/BKing.jpg')
 BKnight_img = cv2.imread('BlackPieces/BKnight.jpg')
